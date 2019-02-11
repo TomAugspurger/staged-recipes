@@ -1,0 +1,45 @@
+{% set name = "ucx" %}
+{% set version = "1.4.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/openucx/{{ name }}/releases/download/v{{ version }}/ucx-{{ version }}.tar.gz
+  sha256: 99891a98476bcadc6ac4ef9c9f083bc6ffb188a96b3c3bc89c8bbca64de2c76e
+
+build:
+  number: 0
+  skip: True  # [not linux]
+  # TODO: zeromq has a run_exports pin_subpackage
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - make
+    - automake
+    - autoconf
+    - libtool
+    - pkg-config
+    - cudatoolkit
+
+test:
+  commands:
+    - ${PREFIX}/bin/ucx_info -v
+
+about:
+  home: http://github.com/openucx/ucx
+  license: BSD-3-Clause
+  license_family: BSD
+  license_file: LICENSE
+  summary: 'Unified Communication X.'
+
+  description: |
+    Unifided Communication X.
+
+  dev_url: https://github.com/openucx/ucx
+
+extra:
+  recipe-maintainers:
+    - TomAugspurger
