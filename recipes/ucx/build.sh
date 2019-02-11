@@ -10,7 +10,7 @@ set -euo pipefail
 ./configure --prefix="$PREFIX" \
     --disable-cma \
     --disable-numa \
-    --disable-cuda \
+    --with-cuda="/usr/local/cuda"
     --enable-mt
 
 make install
